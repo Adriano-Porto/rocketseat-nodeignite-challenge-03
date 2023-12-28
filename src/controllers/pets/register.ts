@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 import { RegisterPetUseCase } from "../../use-cases/register-pet-usecase"
-import { PrismaPetsRepository } from "../../repositories/prisma/petsRepository"
+import { PrismaPetsRepository } from "../../repositories/prisma/prisma-pets-repository"
 
 
 export async function register(req: FastifyRequest, reply: FastifyReply) {
