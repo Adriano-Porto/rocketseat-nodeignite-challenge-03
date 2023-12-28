@@ -1,5 +1,18 @@
-import { Pet, Prisma } from "@prisma/client"
+import { Pet } from "@prisma/client"
+
+export interface PetCreateInput {
+    name: string
+    about: string
+    age: "PUPPY" | "ADULT" | "OLD"
+    size: "SMALL"| "MEDIUM" | "LARGE"
+    energy_level: "LOW" | "MEDIUM" | "HIGH"
+    independence_level:  "LOW" | "MEDIUM" | "HIGH"
+    environment: "OPEN" | "CLOSED"
+    photos: string[]
+    adoption_requisites: string[]
+    org_id: string
+}
 
 export interface PetsRepository {
-    create(data: Prisma.PetUncheckedCreateInput): Promise<Pet>
+    create(data: PetCreateInput): Promise<Pet>
 }

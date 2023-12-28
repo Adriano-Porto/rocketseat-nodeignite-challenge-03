@@ -1,6 +1,6 @@
 import { OrgsRepository } from "../repositories/orgs-repository"
 import { hash } from "bcrypt"
-import { ResourceAlreadyExists } from "./errors/resource-already-exists"
+import { ResourceAlreadyExistsError } from "./errors/resource-already-exists"
 
 interface orgCreateInput {
     email: string
@@ -25,7 +25,7 @@ export class createOrgUsecase {
         const emailExists = await this.orgsRepository.findUniqueByEmail(email)
 
         if (emailExists) {
-            throw new ResourceAlreadyExists("email existente no banco de dados")
+            throw new ResourceAlreadyExistsError()
         }
 
         const org = await this.orgsRepository.create({
@@ -36,6 +36,6 @@ export class createOrgUsecase {
             password_hash
         })
 
-        return org
+        return { org }
     }
 }

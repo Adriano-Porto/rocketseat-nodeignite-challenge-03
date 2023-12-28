@@ -1,5 +1,5 @@
-export class ResourceAlreadyExists extends Error {
-    constructor(message: string){
-        super(message)
+export class ResourceAlreadyExistsError extends Error {
+    constructor(){
+        super("Resource Already Exists")
     }
 }
