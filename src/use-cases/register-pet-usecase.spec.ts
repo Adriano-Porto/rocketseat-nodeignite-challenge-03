@@ -46,9 +46,7 @@ describe("Register Pet", () => {
     
     it("should not be able to register pet with an non existent org", async () => {
 
-        
-
-        expect(() => sut.execute({
+        const invalidRegister = sut.execute({
             name: "seth",
             about: "um belo gato",
             adoption_requisites: [],
@@ -59,6 +57,8 @@ describe("Register Pet", () => {
             org_id: randomUUID(),
             photos: [],
             size: "MEDIUM"
-        })).rejects.toBeInstanceOf(ResourceDoesNotExists)
+        })
+
+        expect(invalidRegister).rejects.toBeInstanceOf(ResourceDoesNotExists)
     }) 
 })
