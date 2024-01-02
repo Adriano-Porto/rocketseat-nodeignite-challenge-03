@@ -15,6 +15,7 @@ describe("Register Pet", () => {
     
     it("should be able to hash password", async () => {
         const { org } = await sut.execute({
+            name: "testing",
             address: "na esquina",
             cep: "58193049",
             email: "pedro@teste.com",
@@ -29,6 +30,7 @@ describe("Register Pet", () => {
     
     it("should be able to register ORG", async () => {
         const { org } = await sut.execute({
+            name: "testing",
             address: "na esquina",
             cep: "58193049",
             email: "pedro@teste.com",
@@ -43,6 +45,7 @@ describe("Register Pet", () => {
         const email = "pedro@teste.com"
 
         await sut.execute({
+            name: "testing",
             address: "na esquina",
             cep: "58193049",
             email,
@@ -51,6 +54,7 @@ describe("Register Pet", () => {
         })
 
         await expect(() => sut.execute({
+            name: "testing",
             address: "na esquina",
             cep: "58193049",
             email,

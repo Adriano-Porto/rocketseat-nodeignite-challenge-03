@@ -3,6 +3,7 @@ import { hash } from "bcrypt"
 import { ResourceAlreadyExistsError } from "./errors/resource-already-exists"
 
 interface orgCreateInput {
+    name: string
     email: string
     cep: string
     address: string
@@ -14,6 +15,7 @@ export class createOrgUsecase {
     constructor(private orgsRepository: OrgsRepository) {}
     
     async execute({
+        name,
         email,
         cep,
         address,
@@ -29,6 +31,7 @@ export class createOrgUsecase {
         }
 
         const org = await this.orgsRepository.create({
+            name,
             email,
             cep,
             address,

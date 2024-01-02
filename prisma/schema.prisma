@@ -59,6 +59,7 @@ model Pet {
 
 model ORG {
   id            String @id @default(uuid())
+  name          String
   email         String @unique
   cep           String
   address       String

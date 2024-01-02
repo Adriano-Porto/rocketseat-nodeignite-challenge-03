@@ -21,4 +21,15 @@ export class orgsRepository implements OrgsRepository {
         if (!org) return null
         return org
     }
+
+    async findUniqueById(id: string) {
+        const org = await prisma.oRG.findUnique({
+            where: {
+                id
+            }
+        })
+
+        if (!org) return null
+        return org
+    }
 }

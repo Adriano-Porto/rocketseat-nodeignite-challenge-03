@@ -9,12 +9,14 @@ export class InMemoryOrgsRepository implements OrgsRepository {
     async create({
         address,
         cep,
+        name,
         email,
         password_hash,
         phone,
     }: Prisma.ORGCreateInput) {
         const org = {
             id: randomUUID(),
+            name,
             address,
             cep,
             email,
@@ -29,6 +31,14 @@ export class InMemoryOrgsRepository implements OrgsRepository {
 
     async findUniqueByEmail(email: string) {
         const org = this.items.find(item => item.email === email)
+        
+        if (!org) return null
+        
+        return org
+    }
+
+    async findUniqueById(id: string) {
+        const org = this.items.find(item => item.id === id)
         
         if (!org) return null
         
