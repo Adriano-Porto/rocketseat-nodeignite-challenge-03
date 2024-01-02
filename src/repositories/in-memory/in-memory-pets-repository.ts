@@ -60,10 +60,13 @@ export class InMemoryPetsRepository implements PetsRepository {
 
             return true
         })
-        
-
-    
-
         return pets
+    }
+
+    async findUniqueById(id: string) {
+        const pet = await this.items.find(pet => pet.id === id)
+
+        if (!pet) return null
+        return pet
     }
 }

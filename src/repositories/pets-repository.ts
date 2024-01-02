@@ -25,4 +25,5 @@ export interface searchPetsOptParams {
 export interface PetsRepository {
     create(data: PetCreateInput): Promise<Pet>
     search(city: string, args: searchPetsOptParams): Promise<Pet[]>
+    findUniqueById(id: string): Promise<Pet | null>
 }
