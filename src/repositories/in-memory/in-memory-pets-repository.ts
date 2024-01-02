@@ -2,7 +2,7 @@ import { ORG, Pet } from "@prisma/client"
 import { PetCreateInput, PetsRepository, searchPetsOptParams } from "../pets-repository"
 import { randomUUID } from "crypto"
 import { OrgsRepository } from "../orgs-repository"
-import { ResourceDoesNotExists } from "../../use-cases/errors/resource-does-not-exists"
+import { ResourceDoesNotExistsError } from "../../use-cases/errors/resource-does-not-exists"
 
 interface inMemoryPets extends Pet{
     org: ORG
@@ -18,7 +18,7 @@ export class InMemoryPetsRepository implements PetsRepository {
     async create(data: PetCreateInput) {
         
         const org = await this.orgsRepository.findUniqueById(data.org_id)
-        if (!org) throw new ResourceDoesNotExists()
+        if (!org) throw new ResourceDoesNotExistsError()
 
 
         const pet = {

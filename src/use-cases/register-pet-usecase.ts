@@ -1,6 +1,5 @@
 import { OrgsRepository } from "../repositories/orgs-repository"
 import { PetsRepository } from "../repositories/pets-repository"
-import { ResourceDoesNotExists } from "./errors/resource-does-not-exists"
 
 interface RegisterPetsArgumentsInterface {
     name: string
@@ -33,10 +32,6 @@ export class RegisterPetUseCase {
         adoption_requisites,
         org_id
     }: RegisterPetsArgumentsInterface) {
-        const org = this.orgsRepository.findUniqueById(org_id)
-
-        if (!org) throw new ResourceDoesNotExists()
-
         const pet = this.petsRepository.create({
             name,
             about,

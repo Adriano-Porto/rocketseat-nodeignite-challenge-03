@@ -4,7 +4,7 @@ import { RegisterPetUseCase } from "./register-pet-usecase"
 import { InMemoryOrgsRepository } from "../repositories/in-memory/in-memory-orgs-repository"
 import { hash } from "bcrypt"
 import { randomUUID } from "node:crypto"
-import { ResourceDoesNotExists } from "./errors/resource-does-not-exists"
+import { ResourceDoesNotExistsError } from "./errors/resource-does-not-exists"
 
 let petsRepository: InMemoryPetsRepository
 let sut: RegisterPetUseCase
@@ -59,6 +59,6 @@ describe("Register Pet", () => {
             size: "MEDIUM"
         })
 
-        expect(invalidRegister).rejects.toBeInstanceOf(ResourceDoesNotExists)
+        expect(invalidRegister).rejects.toBeInstanceOf(ResourceDoesNotExistsError)
     }) 
 })
