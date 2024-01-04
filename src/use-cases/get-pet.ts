@@ -7,6 +7,6 @@ export class GetPetUseCase {
 
         const pet = await this.petsRepository.findUniqueById(id)
 
-        return pet
+        return { pet }
     }
 }

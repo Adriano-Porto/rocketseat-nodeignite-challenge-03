@@ -1,5 +1,5 @@
 import fastify from "fastify"
-import { errorHandler } from "./middlewares/ErrorHandler"
+import { errorHandler } from "./middlewares/error-handler"
 import fastifyCookie from "@fastify/cookie"
 import fastifyJwt from "@fastify/jwt"
 import { env } from "./env"

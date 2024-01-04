@@ -1,12 +1,3 @@
-//             city, {
-// name,
-// age,
-// size,
-// energy_level,
-// independence_level,
-// environment,
-
-
 import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 import { PrismaPetsRepository } from "../../repositories/prisma/prisma-pets-repository"
@@ -36,5 +27,4 @@ export async function searchPets(req: FastifyRequest, reply: FastifyReply) {
     const { pets } = await searchPetsUseCase.execute(city, args)
 
     return reply.status(200).send({ pets })
-
 }
