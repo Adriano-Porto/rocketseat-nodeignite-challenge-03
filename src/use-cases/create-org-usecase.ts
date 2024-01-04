@@ -11,7 +11,7 @@ interface orgCreateInput {
     password: string
 }
 
-export class createOrgUsecase {
+export class CreateOrgUsecase {
     constructor(private orgsRepository: OrgsRepository) {}
     
     async execute({

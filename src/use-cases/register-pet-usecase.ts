@@ -1,4 +1,3 @@
-import { OrgsRepository } from "../repositories/orgs-repository"
 import { PetsRepository } from "../repositories/pets-repository"
 
 interface RegisterPetsArgumentsInterface {
@@ -17,7 +16,6 @@ interface RegisterPetsArgumentsInterface {
 export class RegisterPetUseCase {
     constructor(
         private petsRepository: PetsRepository,
-        private orgsRepository: OrgsRepository
     ){}
 
     async execute({
