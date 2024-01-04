@@ -3,12 +3,18 @@ import { prisma } from "../../lib/prisma-client"
 import { hash } from "bcrypt"
 import request from "supertest"
 
-export async function createAndAuthenticateOrg (
+interface createAndAuthenticateOrgOutput {
+    id: string,
+    token: string
+}
+
+
+export async function createAndAuthenticateOrg(
     app: FastifyInstance
-) {
-    await prisma.oRG.create({
+):  Promise<createAndAuthenticateOrgOutput> {
+    const { id } = await prisma.oRG.create({
         data: {
-            address: "rua nove",
+            address: "campina_grande",
             cep: "580921",
             email: "test@test.com",
             name: "testorg",
@@ -27,6 +33,7 @@ export async function createAndAuthenticateOrg (
     const { token } = authResponse.body
 
     return {
+        id, 
         token
     }
 }

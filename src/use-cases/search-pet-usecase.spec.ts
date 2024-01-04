@@ -109,6 +109,63 @@ describe("List Pet", () => {
 
     })
 
+
+    it("should be able to get pets by multiple params", async () => {
+        const { id } =  await orgsRepository.create({
+            name: "test",
+            password_hash: await hash("123456", 6),
+            phone: "782817209",
+            address: "campina_grande",
+            cep: "82408", 
+            email: "test@teste.com"
+        })
+
+
+        await petsRepository.create({
+            name: "seth",
+            about: "um belo gato",
+            adoption_requisites: [],
+            age: "ADULT",
+            energy_level: "LOW",
+            environment: "OPEN",
+            independence_level: "HIGH",
+            org_id: id,
+            photos: [],
+            size: "MEDIUM"
+        })
+
+        await petsRepository.create({
+            name: "oito",
+            about: "um outro gato",
+            adoption_requisites: [],
+            age: "ADULT",
+            energy_level: "HIGH",
+            environment: "CLOSED",
+            independence_level: "MEDIUM",
+            org_id: id,
+            photos: [],
+            size: "LARGE"
+        })
+
+        await petsRepository.create({
+            name: "nove",
+            about: "um outro gato",
+            adoption_requisites: [],
+            age: "ADULT",
+            energy_level: "HIGH",
+            environment: "CLOSED",
+            independence_level: "MEDIUM",
+            org_id: id,
+            photos: [],
+            size: "LARGE"
+        })
+
+        const search = await sut.execute("campina_grande", { age: "ADULT", energy_level: "HIGH"})
+
+        expect(search.pets).toHaveLength(2)
+
+    })
+
     it("should be able to get pets by name", async () => {
         const { id } =  await orgsRepository.create({
             name: "test",

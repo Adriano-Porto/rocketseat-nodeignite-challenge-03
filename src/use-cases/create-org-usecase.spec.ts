@@ -1,16 +1,16 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import { createOrgUsecase } from "./create-org-usecase"
+import { CreateOrgUsecase } from "./create-org-usecase"
 import { InMemoryOrgsRepository } from "../repositories/in-memory/in-memory-orgs-repository"
 import { compare } from "bcrypt"
 import { ResourceAlreadyExistsError } from "./errors/resource-already-exists"
 
 let orgsRepository: InMemoryOrgsRepository
-let sut: createOrgUsecase
+let sut: CreateOrgUsecase
 
 describe("Register Pet", () => {
     beforeEach(() => {
         orgsRepository = new InMemoryOrgsRepository()
-        sut = new createOrgUsecase(orgsRepository)
+        sut = new CreateOrgUsecase(orgsRepository)
     })
     
     it("should be able to hash password", async () => {
