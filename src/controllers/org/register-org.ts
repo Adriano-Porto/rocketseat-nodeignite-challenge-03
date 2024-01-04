@@ -2,9 +2,10 @@ import { FastifyReply, FastifyRequest } from "fastify"
 import { z } from "zod"
 import { PrismaOrgsRepository } from "../../repositories/prisma/prisma-orgs-repository"
 import { CreateOrgUsecase } from "../../use-cases/create-org-usecase"
+import { ResourceAlreadyExistsError } from "../../use-cases/errors/resource-already-exists"
 
 
-export async function register(req: FastifyRequest, reply: FastifyReply) {
+export async function registerOrg(req: FastifyRequest, reply: FastifyReply) {
     const orgCreateBodySchema = z.object({
         name: z.string(),
         email: z.string().email(),
@@ -15,11 +16,15 @@ export async function register(req: FastifyRequest, reply: FastifyReply) {
     })
 
     const org = orgCreateBodySchema.parse(req.body)
-    const prismaPetsRepository = new PrismaOrgsRepository()
-    const createOrgUsecase = new CreateOrgUsecase(prismaPetsRepository)
+    const prismaOrgsRepository = new PrismaOrgsRepository()
+    const createOrgUsecase = new CreateOrgUsecase(prismaOrgsRepository)
 
-
-    await createOrgUsecase.execute(org)
-
-    return reply.status(200).send()
+    try {
+        await createOrgUsecase.execute(org)
+        return reply.status(201).send()
+    } catch (err) {
+        if (err instanceof ResourceAlreadyExistsError) {
+            return reply.status(400).send({msg: "Email já em uso"})
+        }
+    }
 }
