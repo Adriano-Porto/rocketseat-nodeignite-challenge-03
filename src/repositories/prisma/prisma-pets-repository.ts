@@ -30,6 +30,8 @@ export class PrismaPetsRepository implements PetsRepository {
         const pet = await prisma.pet.findUnique({
             where: {
                 id
+            }, include: {
+                org: true
             }
         })
 

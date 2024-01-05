@@ -1,17 +1,12 @@
-import { ORG, Pet } from "@prisma/client"
-import { PetCreateInput, PetsRepository, searchPetsOptParams } from "../pets-repository"
+import { PetCreateInput, PetWithOrg, PetsRepository, searchPetsOptParams } from "../pets-repository"
 import { randomUUID } from "crypto"
 import { OrgsRepository } from "../orgs-repository"
 import { ResourceDoesNotExistsError } from "../../use-cases/errors/resource-does-not-exists"
 
-interface inMemoryPets extends Pet{
-    org: ORG
-}
-
 
 
 export class InMemoryPetsRepository implements PetsRepository {
-    public items: inMemoryPets[] = []
+    public items: PetWithOrg[] = []
 
     constructor(private orgsRepository: OrgsRepository){}
 

@@ -25,6 +25,7 @@ export async function registerOrg(req: FastifyRequest, reply: FastifyReply) {
     } catch (err) {
         if (err instanceof ResourceAlreadyExistsError) {
             return reply.status(400).send({msg: "Email já em uso"})
-        }
+        } 
+        throw err
     }
 }

@@ -1,4 +1,4 @@
-import { Pet } from "@prisma/client"
+import { Pet, ORG } from "@prisma/client"
 
 export interface PetCreateInput {
     name: string
@@ -22,8 +22,12 @@ export interface searchPetsOptParams {
     environment?: "OPEN" | "CLOSED" 
 }
 
+export interface PetWithOrg extends Pet{
+    org: ORG
+}
+
 export interface PetsRepository {
     create(data: PetCreateInput): Promise<Pet>
     search(city: string, args: searchPetsOptParams): Promise<Pet[]>
-    findUniqueById(id: string): Promise<Pet | null>
+    findUniqueById(id: string): Promise<PetWithOrg | null>
 }

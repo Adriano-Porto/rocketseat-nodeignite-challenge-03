@@ -33,6 +33,6 @@ export async function authenticateOrg(req: FastifyRequest, reply: FastifyReply) 
         if (err instanceof InvalidCredentialsError) {
             return reply.status(400).send()
         }
-        return reply.status(500).send()
+        throw err
     }
 }

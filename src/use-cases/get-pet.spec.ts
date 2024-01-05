@@ -4,6 +4,7 @@ import { InMemoryOrgsRepository } from "../repositories/in-memory/in-memory-orgs
 import { hash } from "bcrypt"
 import { GetPetUseCase } from "./get-pet"
 import { randomUUID } from "crypto"
+import { ResourceDoesNotExistsError } from "./errors/resource-does-not-exists"
 
 let petsRepository: InMemoryPetsRepository
 let sut: GetPetUseCase
@@ -40,7 +41,7 @@ describe("Get Pet", () => {
             size: "MEDIUM"
         })
 
-        const pet = await sut.execute(createdPet.id)
+        const { pet } = await sut.execute(createdPet.id)
 
         expect(pet).toEqual(expect.objectContaining({
             id: createdPet.id
@@ -70,8 +71,6 @@ describe("Get Pet", () => {
             size: "MEDIUM"
         })
 
-        const pet = await sut.execute(randomUUID())
-
-        expect(pet).toEqual(null)
+        expect(() => sut.execute(randomUUID())).rejects.toBeInstanceOf(ResourceDoesNotExistsError)
     })
 })

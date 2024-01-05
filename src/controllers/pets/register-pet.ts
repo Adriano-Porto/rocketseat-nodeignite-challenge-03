@@ -34,6 +34,7 @@ export async function registerPet(req: FastifyRequest, reply: FastifyReply) {
         if (err instanceof ResourceDoesNotExistsError) {
             return reply.status(400).send({msg: "Org does not exists"})
         }
+        throw err
     }
 
 }
